@@ -29,7 +29,6 @@ class MeetupApp {
         this.setupGlobalEvents();
         this.setupMapClick();
     this.setupScrollToTop();
-    this.setupCountdown();
     }
 
     setupGlobalEvents() {
@@ -123,55 +122,6 @@ class MeetupApp {
         }
     }
 
-    setupCountdown() {
-        const countdownEl = document.getElementById('countdown');
-        if (!countdownEl) return;
-
-        // Event start: 2025-11-05 16:45 local (assume Europe/Zurich)
-        // Using ISO string without timezone to rely on local time; adjust if needed
-        const eventDate = new Date('2025-11-05T16:45:00');
-
-        const updateCountdown = () => {
-            const now = new Date();
-            let diff = eventDate - now;
-
-            if (diff <= 0) {
-                countdownEl.textContent = 'Event is starting';
-                return;
-            }
-
-            const minutesTotal = Math.floor(diff / 60000);
-            const days = Math.floor(minutesTotal / (60 * 24));
-            const hours = Math.floor((minutesTotal % (60 * 24)) / 60);
-            const minutes = minutesTotal % 60;
-
-            // Format string
-            const parts = [];
-            if (days > 0) parts.push(days + 'd');
-            parts.push(hours + 'h');
-            parts.push(minutes + 'm');
-            countdownEl.textContent = parts.join(' ');
-        };
-
-        // Initial update
-        updateCountdown();
-        // Update every minute (if under 2 hours we can switch to every 15s for precision) 
-        let interval = setInterval(updateCountdown, 60000);
-
-        // Optional: refine updates when close (< 2 hours)
-        const refineIntervalCheck = () => {
-            const now = new Date();
-            const diff = eventDate - now;
-            if (diff < 2 * 60 * 60 * 1000 && interval) {
-                clearInterval(interval);
-                interval = setInterval(updateCountdown, 15000);
-            }
-            if (diff <= 0 && interval) {
-                clearInterval(interval);
-            }
-        };
-        setInterval(refineIntervalCheck, 60000);
-    }
 }
 
 // Start the application
