@@ -1,4 +1,4 @@
-# Tech Meetup Munich Website
+# GitHub Copilot Meetup - Website
 
 A modern, responsive static website for the Tech Meetup Munich event, built with pure HTML, CSS, and vanilla JavaScript following modern web development best practices.
 
@@ -13,10 +13,10 @@ A modern, responsive static website for the Tech Meetup Munich event, built with
 
 ## 📋 Event Information
 
-- **Event**: Tech Meetup Munich - October 2025
-- **Date**: Friday, October 25th, 2025
-- **Time**: 6:00 PM - 9:30 PM (Doors open at 5:30 PM)
-- **Location**: Munich Tech Hub, Maximilianstraße 13, 80539 München
+- **Event**: GitHub Copilot Meetup - November 2025
+- **Date**: Friday, November 5th, 2025
+- **Time**: 4:45 PM - 6:30 PM (Doors open at 5:30 PM)
+- **Location**: isolutions AG, The Circle 38, 8058 Zürich
 - **Capacity**: max 50 attendees
 - **Cost**: Free event with registration required
 
@@ -168,9 +168,9 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 📞 Contact
 
 For questions about the event or website:
-- Email: info@techmeetup-munich.de
-- Twitter: @TechMeetupMunich
-- LinkedIn: TechMeetup Munich
+- Email: christoph.koenig@isoluions.ch
+- LinkedIn: [Zero Day Solutions: Agentic Coding mit Github Copilot Agent](https://www.linkedin.com/events/zero-daysolutions-agenticcoding7383402489729175552/)
+- Meetup: [Zero Day Solutions: Github Copilot](https://www.meetup.com/github-copilot-user-group-zurich/events/311546750/?slug=github-copilot-user-group-zurich&isFirstPublish=true)
 
 ---
 
