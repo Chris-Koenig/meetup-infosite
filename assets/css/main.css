@@ -207,6 +207,40 @@ input, button, textarea, select {
     width: 100%;
 }
 
+.nav__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xs) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    background-color: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+    transition: var(--transition-base);
+    white-space: nowrap;
+}
+
+.nav__cta:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.nav__cta--login {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.nav__cta--login:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
 .nav__toggle {
     display: none;
     flex-direction: column;
