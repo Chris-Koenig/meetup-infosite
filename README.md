@@ -97,12 +97,32 @@ meetup-website/
 - **Mobile Menu**: Responsive navigation toggle
 - **Scroll to Top**: Floating action button
 - **Interactive Map**: Click to open in Google Maps
+- **Client-Side Logging**: Comprehensive logging system with multiple log levels
 
 ### Module Architecture
 - ES6 modules for clean code organization
 - Separation of concerns with dedicated modules
 - Event delegation and efficient DOM manipulation
 - Progressive enhancement approach
+- Centralized logging for debugging and monitoring
+
+### Logging System
+The application includes a sophisticated client-side logging module (`logger.js`) that provides:
+- **Multiple Log Levels**: DEBUG, INFO, WARN, ERROR
+- **Console Output**: Formatted logs with timestamps and context
+- **Optional Storage**: Persist logs to localStorage for debugging
+- **Child Loggers**: Create context-specific loggers for each module
+- **Development Mode**: Global logger access on localhost for debugging
+
+Example usage in browser console (localhost only):
+```javascript
+logger.info('Test message');
+logger.setLevel(logger.constructor.LogLevel.DEBUG);
+logger.getLogs(); // Get stored logs
+logger.exportLogs(); // Download logs as JSON
+```
+
+For detailed documentation, see [JavaScript Modules README](assets/js/modules/README.md).
 
 ## 🔧 Customization
 

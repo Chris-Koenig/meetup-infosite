@@ -3,9 +3,11 @@ import { Navigation } from './modules/navigation.js';
 import { SmoothScroll } from './modules/smooth-scroll.js';
 import { RegistrationForm } from './modules/registration-form.js';
 import { AnimationObserver } from './modules/animation-observer.js';
+import { logger, Logger } from './modules/logger.js';
 
 class MeetupApp {
     constructor() {
+        this.logger = logger;
         this.init();
     }
 
@@ -16,9 +18,13 @@ class MeetupApp {
         } else {
             this.setup();
         }
+        
+        this.logger.info('MeetupApp initialized');
     }
 
     setup() {
+        this.logger.info('Setting up MeetupApp modules');
+        
         // Initialize modules
         new Navigation();
         new SmoothScroll();
@@ -28,7 +34,15 @@ class MeetupApp {
         // Setup global event listeners
         this.setupGlobalEvents();
         this.setupMapClick();
-    this.setupScrollToTop();
+        this.setupScrollToTop();
+        
+        this.logger.info('MeetupApp setup complete');
+        
+        // Expose logger globally for debugging (development only)
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            window.logger = this.logger;
+            this.logger.debug('Logger exposed globally for development');
+        }
     }
 
     setupGlobalEvents() {
@@ -52,6 +66,7 @@ class MeetupApp {
             mapPlaceholder.addEventListener('click', () => {
                 const address = encodeURIComponent('isolutions AG, The circle 38, Kloten, Switzerland');
                 const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${address}`;
+                this.logger.info('Opening map in new window', { address });
                 window.open(googleMapsUrl, '_blank');
             });
         }
@@ -85,6 +100,7 @@ class MeetupApp {
 
     handleRegisterClick(event) {
         event.preventDefault();
+        this.logger.debug('Register button clicked');
         const registerSection = document.getElementById('register');
         if (registerSection) {
             registerSection.scrollIntoView({ 
@@ -104,6 +120,7 @@ class MeetupApp {
 
     handleDetailsClick(event) {
         event.preventDefault();
+        this.logger.debug('Details button clicked');
         const detailsSection = document.getElementById('details');
         if (detailsSection) {
             detailsSection.scrollIntoView({ 

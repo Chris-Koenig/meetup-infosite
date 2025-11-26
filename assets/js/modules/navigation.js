@@ -1,6 +1,9 @@
 // modules/navigation.js
+import { logger } from './logger.js';
+
 export class Navigation {
     constructor() {
+        this.logger = logger.createChild('Navigation');
         this.nav = document.querySelector('.nav');
         this.navLinks = document.querySelectorAll('.nav__link');
         this.navToggle = document.querySelector('.nav__toggle');
@@ -8,9 +11,11 @@ export class Navigation {
     }
 
     init() {
+        this.logger.info('Initializing Navigation module');
         this.setupSmoothScrolling();
         this.setupActiveStates();
         this.setupMobileMenu();
+        this.logger.info('Navigation module initialized');
     }
 
     setupSmoothScrolling() {
@@ -21,6 +26,7 @@ export class Navigation {
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
+                    this.logger.debug('Smooth scrolling to section', { targetId });
                     const headerOffset = 80;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -32,6 +38,8 @@ export class Navigation {
 
                     // Close mobile menu if open
                     this.closeMobileMenu();
+                } else {
+                    this.logger.warn('Target element not found for navigation', { targetId });
                 }
             });
         });
@@ -97,6 +105,7 @@ export class Navigation {
     }
 
     openMobileMenu() {
+        this.logger.debug('Opening mobile menu');
         const navList = document.querySelector('.nav__list');
         navList.classList.add('nav__list--open');
         this.navToggle.classList.add('nav__toggle--open');
@@ -104,6 +113,7 @@ export class Navigation {
     }
 
     closeMobileMenu() {
+        this.logger.debug('Closing mobile menu');
         const navList = document.querySelector('.nav__list');
         navList.classList.remove('nav__list--open');
         this.navToggle.classList.remove('nav__toggle--open');

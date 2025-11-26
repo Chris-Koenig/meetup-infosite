@@ -1,15 +1,23 @@
 // modules/registration-form.js
+import { logger } from './logger.js';
+
 export class RegistrationForm {
     constructor() {
+        this.logger = logger.createChild('RegistrationForm');
         this.form = document.getElementById('registrationForm');
         this.init();
     }
 
     init() {
-        if (!this.form) return;
+        if (!this.form) {
+            this.logger.warn('Registration form not found on page');
+            return;
+        }
         
+        this.logger.info('Initializing RegistrationForm module');
         this.setupFormValidation();
         this.setupFormSubmission();
+        this.logger.info('RegistrationForm module initialized');
     }
 
     setupFormValidation() {
@@ -52,6 +60,7 @@ export class RegistrationForm {
         }
 
         if (!isValid) {
+            this.logger.debug('Field validation failed', { fieldName, errorMessage });
             this.showError(field, errorMessage);
         }
 
@@ -104,6 +113,7 @@ export class RegistrationForm {
     }
 
     async submitForm() {
+        this.logger.info('Submitting registration form');
         const submitButton = this.form.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         
@@ -115,6 +125,8 @@ export class RegistrationForm {
             // Simulate API call
             await this.simulateRegistration();
             
+            this.logger.info('Registration successful');
+            
             // Show success message
             this.showSuccessMessage();
             
@@ -122,8 +134,8 @@ export class RegistrationForm {
             this.form.reset();
             
         } catch (error) {
+            this.logger.error('Registration failed', error);
             this.showErrorMessage('Registration failed. Please try again.');
-            console.error('Registration error:', error);
         } finally {
             // Reset button state
             submitButton.textContent = originalText;

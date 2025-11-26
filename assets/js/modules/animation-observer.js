@@ -1,12 +1,17 @@
 // modules/animation-observer.js
+import { logger } from './logger.js';
+
 export class AnimationObserver {
     constructor() {
+        this.logger = logger.createChild('AnimationObserver');
         this.init();
     }
 
     init() {
+        this.logger.info('Initializing AnimationObserver module');
         this.setupIntersectionObserver();
         this.addAnimationStyles();
+        this.logger.info('AnimationObserver module initialized');
     }
 
     setupIntersectionObserver() {
@@ -14,6 +19,9 @@ export class AnimationObserver {
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        this.logger.debug('Animating element into view', { 
+                            element: entry.target.className 
+                        });
                         entry.target.classList.add('animate-in');
                         observer.unobserve(entry.target);
                     }
@@ -35,6 +43,10 @@ export class AnimationObserver {
             .registration-form,
             .section-title
         `);
+
+        this.logger.debug('Setting up animation observers', { 
+            elementCount: animatedElements.length 
+        });
 
         animatedElements.forEach(el => {
             el.classList.add('animate-on-scroll');
