@@ -45,7 +45,10 @@ export class Logger {
                 localStorage.setItem(this.storageKey, JSON.stringify([]));
             }
         } catch (error) {
-            console.warn('Failed to initialize log storage:', error);
+            // Use direct console for internal errors to avoid infinite recursion
+            if (this.enableConsole) {
+                console.warn('Failed to initialize log storage:', error);
+            }
             this.enableStorage = false;
         }
     }
@@ -209,7 +212,10 @@ export class Logger {
             
             localStorage.setItem(this.storageKey, JSON.stringify(logs));
         } catch (error) {
-            console.warn('Failed to store log entry:', error);
+            // Use direct console for internal errors to avoid infinite recursion
+            if (this.enableConsole) {
+                console.warn('Failed to store log entry:', error);
+            }
         }
     }
 
@@ -225,7 +231,10 @@ export class Logger {
         try {
             return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
         } catch (error) {
-            console.error('Failed to retrieve logs:', error);
+            // Use direct console for internal errors to avoid infinite recursion
+            if (this.enableConsole) {
+                console.error('Failed to retrieve logs:', error);
+            }
             return [];
         }
     }
@@ -240,9 +249,15 @@ export class Logger {
 
         try {
             localStorage.setItem(this.storageKey, JSON.stringify([]));
-            console.info('Logs cleared');
+            // Use direct console for internal messages to avoid recursion
+            if (this.enableConsole) {
+                console.info('Logs cleared');
+            }
         } catch (error) {
-            console.error('Failed to clear logs:', error);
+            // Use direct console for internal errors to avoid infinite recursion
+            if (this.enableConsole) {
+                console.error('Failed to clear logs:', error);
+            }
         }
     }
 
